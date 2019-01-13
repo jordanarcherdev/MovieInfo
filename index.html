@@ -1,0 +1,36 @@
+
+<head>
+
+</head>
+<body>
+  <h1>Movie Info</h1>
+
+    <form>
+      <div>
+        <label>Input Moive Name</label>
+        <input id="ip" type="text" />
+      </div>
+      <button type="submit">Get Info</button>
+    </form>
+
+    <p id="result"></p>
+
+<script>
+  const electron = require('electron');
+  const { ipcRenderer } = electron;
+
+  document.querySelector('form').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const movieName = document.getElementById('ip').value;
+    console.log(movieName);
+    ipcRenderer.send('movie:submit', movieName);
+  });
+
+  ipcRenderer.on('movie:info', (event, info) => {
+    document.querySelector('#result').innerHTML = `${info.year}`;
+  });
+</script>
+
+
+</body>
