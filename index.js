@@ -14,6 +14,7 @@ app.on('ready', () => {
 ipcMain.on('movie:submit', (event, movieName) => {
   console.log(movieName)
   imdb.get({name: movieName}, {apiKey: '5467c2e2', timeout: 30000}).then((film) => {
+
       //Create Movie Object
       const newMovie = {
               name: film.name,
